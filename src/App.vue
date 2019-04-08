@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <headbar/>
+    <headbar v-if="hackReset"/>
     
     <router-view/>
     
@@ -13,6 +13,11 @@ import headbar from '@/base/HeadBar'
 import footerbar from '@/base/FooterBar'
 export default {
   name: 'App',
+  data(){
+    return {
+      hackReset: true
+    }
+  },
   components:{
     headbar,
     footerbar

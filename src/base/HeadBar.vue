@@ -47,20 +47,60 @@ export default {
       },
       handleCommand(command) {
           if(command == 'loginout'){
-              sessionStorage.removeItem('ms_username')
-              sessionStorage.removeItem('ms_userId')
+              //清理storage，同时改动vuex里面的islogin状态可以响应改变
+              localStorage.removeItem('leaderInfo')
+              localStorage.removeItem('teacherInfo')
+              localStorage.removeItem('studentInfo')
+              localStorage.removeItem('isLogin')
+              this.$store.dispatch('changeLogin',false)
+              this.username=''
               this.$router.push('/login');
           } else if (command == 'userCenter') {
               this.$router.push('/userCenter');
           }
-      }
+      },
+
     },
     computed:{
         username(){
-            let username = sessionStorage.getItem('ms_username');
-            return username ? username : this.name;
+            if(window.localStorage.getItem('leaderInfo')){
+                this.username =  JSON.parse(localStorage.getItem('leaderInfo')).sphone
+                
+            }
+            else if(window.localStorage.getItem('teacherInfo')){
+                this.username =  JSON.parse(localStorage.getItem('teacherInfo')).tname
+                
+            }
+            else if(window.localStorage.getItem('studentInfo')){
+                this.username =  JSON.parse(localStorage.getItem('studentInfo')).sname
+                
+            }
+            else{
+                this.username =  this.$store.getters['getUserName']
+            }
         }
-    },
+    }
+    // watch:{
+    //     username(){
+    //         if(window.localStorage.getItem('leaderInfo')){
+    //             this.username = JSON.parse(localStorage.getItem('leaderInfo')).sphone
+    //             
+    //         }
+    //         else if(window.localStorage.getItem('teacherInfo')){
+    //             this.username = JSON.parse(localStorage.getItem('teacherInfo')).tname
+    //             // return username ? username : this.name;
+    //         }
+    //         else if(window.localStorage.getItem('studentInfo')){
+    //             this.username = JSON.parse(localStorage.getItem('studentInfo')).sname
+    //             // return username ? username : this.name;
+    //         }
+    //         else{
+    //             // return username ? username : this.name;
+    //         }
+    //         // let username = localStorage.getItem('ms_username');
+    //         // return username ? username : this.name;
+    //     }
+    // },
 }
 </script>
 <style scoped>

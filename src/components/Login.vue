@@ -97,11 +97,12 @@ export default {
         if (valid) {
           //console.log(this.form.identity +'   '+identity )
           if (identity === '领导') {
-            
             this.$axios.post('/api/user/leaderLogin', data).then((response) => {
               if (response.data.length === 1) {
-                //localStorage.setItem('teacher_info', response.data[0].tid)
-                // setCookie('leader', this.form.phoneNum, 1000 * 60)  改localStorage 或者 sessionStorage
+                localStorage.setItem('leaderInfo', response.data[0])
+                localStorage.setItem('isLogin','1')
+                this.$store.dispatch('changeUserName',response.data[0].sphone)
+                this.$store.dispatch('changeLogin',true)
                 setTimeout(function() {
                   this.$router.push({
                     path: `/leader`
@@ -114,31 +115,37 @@ export default {
           } else if (identity === '教师') {
             this.$axios.post('/api/user/teacherLogin', data).then((response) => {
               console.log(response)
-              if (response.data.length === 1) {
-                localStorage.setItem('teacher_info', response.data[0].tid)
-                // setCookie('teacher', this.form.phoneNum, 1000 * 60)
-                setTimeout(function() {
+              if(response.data){
+                //webStorage存储老师信息和登陆状态
+                window.localStorage.setItem('teacherInfo',JSON.stringify(response.data[0]))//通过转换字符串存JSON对象
+                window.localStorage.setItem('isLogin','1')
+                this.$store.dispatch('changeUserName',response.data[0].tname)
+                this.$store.dispatch('changeLogin',true)
+                setTimeout(function(){
                   this.$router.push({
-                    path: `/teacher`
+                    path:'/teacher'
                   })
                 }.bind(this), 500)
-              } else {
-                this.err()
+              }else{
+                console.log(err)
               }
             })
           } else if (identity === '学生') {
             this.$axios.post('/api/user/studentLogin', data).then((response) => {
-              if (response.data.length === 1) {
+              if (response.data) {
                 console.log(response.data)
-                // setCookie('studentno', response.data[0].sno, 1000 * 60)
-                // setCookie('student', this.form.phoneNum, 1000 * 60)
+                //webStorage存储学生信息和登陆状态
+                window.localStorage.setItem('studentInfo',JSON.stringify(response.data[0]))
+                window.localStorage.setItem('isLogin','1')
+                this.$store.dispatch('changeUserName',response.data[0].sname)
+                this.$store.dispatch('changeLogin',true)
                 setTimeout(function() {
                   this.$router.push({
                     path: `/student`
                   })
                 }.bind(this), 500)
               } else {
-                this.err()
+                this.err()//需要改进
               }
             })
           }
@@ -157,6 +164,19 @@ export default {
     }
   },
   components: {
+  },
+  mounted(){
+    if(window.localStorage.getItem('isLogin')){
+      if(window.localStorage.getItem('teacherInfo')){
+        this.$router.push("/teacher")
+      }
+      else if(window.localStorage.getItem('studentInfo')){
+        this.$router.push("/student")
+      }
+      else if(window.localStorage.getItem('leaderInfo')){
+        this.$router.push("/leader")
+      }
+    }
   }
 }
 </script>

@@ -21,6 +21,7 @@
       </el-col>
       <!-- 右半部为两个标签页，分别设置displayblock和none -->
       <el-col  :md="{span: 12}" :xs="{span:16}" :sm="{span:16}">
+          <!-- 注册count -->
         <div ref="count" style="display:block">
           <el-tabs type="border-card">
             <!-- tab页1 -->
@@ -37,14 +38,15 @@
                 </svg>
               </div>
             <!-- 针对二维码进行放大和缩小 -->
-              <el-button type="primary" @click="zoom(1.1)">放大</el-button>
-              <el-button type="primary" @click="zoom(0.9)">缩小</el-button>
+              <el-button type="info" @click="zoom(1.1)">放大</el-button>
+              <el-button type="info" @click="zoom(0.9)">缩小</el-button>
             </el-tab-pane>
             <!-- tab页2 -->
             <el-tab-pane label="出勤记录">
-              <el-button type="primary" @click="queryRecord">查询</el-button>
+              <el-button type="info" icon="h-icon-search" :radius="true" class="searchBtn" @click="queryRecord">查询所有签到信息</el-button>
+              <!-- 表格，用来陈列签到数据 -->
               <div style="margin-top:10px">
-                <el-table :data="recordArr" height="200" border style="width: 100%">
+                <el-table :data="recordArr" height="200" tooltip-effect="dark" border style="width: 100%">
                   <el-table-column prop="sname" label="姓名" width="80">
                   </el-table-column>
                   <el-table-column prop="ssex" label="性别" width="80">
@@ -60,9 +62,10 @@
             </el-tab-pane>
           </el-tabs>
         </div>
+        <!-- 默认隐藏注册节点 -->
         <div style="display:none" ref='manage'>
           <el-input placeholder="待访问地址" v-model="qrURL">
-            <template slot="prepend">Http://</template>
+            <template slot="prepend"><span class='fontBorder'>http://</span></template>
           </el-input>
           <div class="select">
             <el-select v-model="value" placeholder="请选择">
@@ -86,5 +89,8 @@ export default {
 }
 .qr_img {
   margin-top: 20px;
+}
+.searchBtn{
+    float: left;
 }
 </style>

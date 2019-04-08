@@ -3,12 +3,21 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import HUI from 'hui'
-import 'hui/lib/hui.css'//引入样式
+import HUI from 'hui'//引入HUI
+import 'hui/lib/hui.css'//引入HUI样式
 import Axios from 'axios'//引入axios
+import Vuex from 'vuex'//引入vuex 管理状态
+import userStore from './store/userStore.js'//引入vuex仓库
+Vue.use(Vuex)
+let store = new Vuex.Store({
+  modules:{
+    userStore
+  }
+})
 
 Vue.prototype.$axios = Axios
-// Axios.defaults.baseURL='http://localhost:3000'
+Axios.defaults.baseURL='http://localhost:3000'
+
 
 Vue.use(HUI)
 
@@ -18,6 +27,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
