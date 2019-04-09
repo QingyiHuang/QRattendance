@@ -17,7 +17,7 @@
         </el-form-item>
         <!-- 用户身份，这里分教师，领导学生，采用radio-group，但需要包裹在form-item里面 identity验证规则 -->
         <el-form-item label="用户身份：" prop="identity">
-          <el-radio-group v-model="form.identity">
+          <el-radio-group v-model="form.identity" :size="small">
             <el-radio class="radio" label="领导"></el-radio>
             <el-radio class="radio" label="教师"></el-radio>
             <el-radio class="radio" label="学生"></el-radio>
@@ -25,8 +25,8 @@
         </el-form-item>
       </el-form>
       <!-- 两个按钮作为提交和重置使用 分别触发Login和reset方法，样式是primary -->
-      <el-button type="primary" @click="Login('form')" size="large" style="width:160px">登录</el-button>
-      <el-button type="primary" @click="reset('form')" size="large" style="width:160px">取消</el-button>
+      <el-button type="primary" @click="Login('form')" size="large" style="width:1.5em">登录</el-button>
+      <el-button type="primary" @click="reset('form')" size="large" style="width:1.5em">取消</el-button>
     </el-col>
     </el-row>
   </div>
@@ -133,7 +133,7 @@ export default {
           } else if (identity === '学生') {
             this.$axios.post('/api/user/studentLogin', data).then((response) => {
               if (response.data) {
-                console.log(response.data)
+                console.log(response.data[0])
                 //webStorage存储学生信息和登陆状态
                 window.localStorage.setItem('studentInfo',JSON.stringify(response.data[0]))
                 window.localStorage.setItem('isLogin','1')
@@ -190,4 +190,9 @@ export default {
   width: 200px;
   height: 200px;
 }
+/* 解决输入框抖动问题 */
+.el-select__input {
+    vertical-align: baseline;
+}
+
 </style>

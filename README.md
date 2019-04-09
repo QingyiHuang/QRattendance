@@ -1,5 +1,24 @@
 # demo
 
+ie情况下
+第一步：下载插件： cnpm install --save babel-polyfill
+
+第二步：入口文件main.js引入( import 'babel-polyfill')
+
+第三步：配置文件修改 vue-loader.conf（脚手架工具构建的项目修改这个配置文件，如果没有就修改webpack.conf.js),如下增加
+
+``` javascript
+entrymodule.exports = {    
+	entry: ["babel-polyfill", "./app/js"]
+}
+```
+
+
+
+
+
+
+
 > A Vue.js project
 
 ## Build Setup

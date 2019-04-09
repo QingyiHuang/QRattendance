@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <headbar v-if="hackReset"/>
-    
-    <router-view/>
+    <!-- 过渡 -->
+    <transition mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated bounceOut">
+      <router-view/>
+    </transition>
     
     <footerbar/>
   </div>
@@ -36,6 +38,21 @@ export default {
   margin-top: 60px;
   font-family: 'ShaoNv Font'
 }
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.slide-fade-enter-active {
+  transition: all .1s ease;
+}
+.slide-fade-leave-active {
 
-
+  transition: all .1s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+body {
+margin-bottom: 60px;
+}
 </style>
