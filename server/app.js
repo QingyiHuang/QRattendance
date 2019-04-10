@@ -8,6 +8,7 @@ const dictionaryQuery = require('./api/dictionaryQuery');
 const dictionaryAdd = require('./api/dictionaryAdd');
 const recordQuery = require('./api/recordQuery');
 const recordQd = require('./api/recordQd');
+const recordbyName = require('./api/recordbyName');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -35,6 +36,8 @@ app.use('/api/dictionary', dictionaryQuery);
 app.use('/api/dictionary', dictionaryAdd);
 app.use('/api/record', recordQuery);
 app.use('/api/record', recordQd);
+app.use('/api/recordbyname',recordbyName);
+
 // 监听端口
 app.listen(3000);
 console.log('success listen at port:3000......');

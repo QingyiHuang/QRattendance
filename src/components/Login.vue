@@ -2,23 +2,23 @@
   <div>
     <img src="@/assets/img/quicktime.png" class="qtp">
     <el-row class="login">
-      <el-col :md="{span: 10, offset: 7}" :sm="{span: 12,offset: 6}" :lg="{span: 8,offset: 8}" :xs="{span: 18,offset: 3}">
+      <el-col :md="{span: 10, offset: 7}" :sm="{span: 12,offset: 6}" :lg="{span: 8,offset: 8}" :xs="{span: 20,offset: 2}">
       <!-- 将待提交的表单注册一个DOM对象 ref=form -->
       <el-form :model="form" :label-position="labelPosition" ref="form" :rules="rules" label-width="100px">
         <!-- 手机号码输入框 验证规则phoneNum -->
-        <el-form-item label="手机号码：" prop='phoneNum'>
+        <el-form-item id="phone" label="手机号码：" @focus="scrollPhone" prop='phoneNum'>
           <el-input v-model.number="form.phoneNum" type="text" placeholder="手机号码">
           </el-input>
         </el-form-item>
         <!-- 密码输入框 验证规则passWord-->
-        <el-form-item label="用户密码：" prop='passWord'>
+        <el-form-item label="用户密码：" @focus="scrollPhone" prop='passWord'>
           <el-input v-model="form.passWord" type="password" placeholder="用户密码">
           </el-input>
         </el-form-item>
         <!-- 用户身份，这里分教师，领导学生，采用radio-group，但需要包裹在form-item里面 identity验证规则 -->
         <el-form-item label="用户身份：" prop="identity">
-          <el-radio-group v-model="form.identity" :size="small">
-            <el-radio class="radio" label="领导"></el-radio>
+          <el-radio-group v-model="form.identity" :size="small" class="radio-group">
+            <!-- <el-radio class="radio" label="领导"></el-radio> -->
             <el-radio class="radio" label="教师"></el-radio>
             <el-radio class="radio" label="学生"></el-radio>
           </el-radio-group>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { GetQueryString } from '@/util/getUrlParam.js'
 export default {
   name: 'Login',
   data() {
@@ -101,6 +102,7 @@ export default {
               if (response.data.length === 1) {
                 localStorage.setItem('leaderInfo', response.data[0])
                 localStorage.setItem('isLogin','1')
+                localStorage.setItem('userName',response.data[0].sphone)
                 this.$store.dispatch('changeUserName',response.data[0].sphone)
                 this.$store.dispatch('changeLogin',true)
                 setTimeout(function() {
@@ -119,6 +121,7 @@ export default {
                 //webStorage存储老师信息和登陆状态
                 window.localStorage.setItem('teacherInfo',JSON.stringify(response.data[0]))//通过转换字符串存JSON对象
                 window.localStorage.setItem('isLogin','1')
+                localStorage.setItem('userName',response.data[0].tname)
                 this.$store.dispatch('changeUserName',response.data[0].tname)
                 this.$store.dispatch('changeLogin',true)
                 setTimeout(function(){
@@ -131,17 +134,21 @@ export default {
               }
             })
           } else if (identity === '学生') {
+            let qstarttime = GetQueryString('time')
+
             this.$axios.post('/api/user/studentLogin', data).then((response) => {
               if (response.data) {
                 console.log(response.data[0])
                 //webStorage存储学生信息和登陆状态
                 window.localStorage.setItem('studentInfo',JSON.stringify(response.data[0]))
                 window.localStorage.setItem('isLogin','1')
+                localStorage.setItem('userName',response.data[0].sname)
                 this.$store.dispatch('changeUserName',response.data[0].sname)
                 this.$store.dispatch('changeLogin',true)
+                let did = JSON.parse(window.localStorage.getItem('studentInfo')).sno
                 setTimeout(function() {
                   this.$router.push({
-                    path: `/student`
+                    path: `/student?did=`+did+`&time=`+qstarttime
                   })
                 }.bind(this), 500)
               } else {
@@ -161,11 +168,19 @@ export default {
     },
     err() {
       this.$message('用户名不存在或密码错误')
+    },
+    scrollPhone(){
+      this.$router.push({
+        path: `/student/#phone/?did=`+did+`&time=`+qstarttime
+      })
     }
+    
   },
   components: {
   },
   mounted(){
+    //抓取路由中的数据，存到sessionStorage里面
+
     if(window.localStorage.getItem('isLogin')){
       if(window.localStorage.getItem('teacherInfo')){
         this.$router.push("/teacher")
@@ -194,5 +209,8 @@ export default {
 .el-select__input {
     vertical-align: baseline;
 }
+/* .radio-group{
+
+} */
 
 </style>

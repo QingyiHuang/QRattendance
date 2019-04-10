@@ -19,7 +19,7 @@ let store = new Vuex.Store({
 })
 
 Vue.prototype.$axios = Axios
-Axios.defaults.baseURL='http://localhost:3000'
+Axios.defaults.baseURL='http://192.168.191.1:3000'
 
 
 Vue.use(HUI)

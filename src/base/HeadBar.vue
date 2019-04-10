@@ -13,10 +13,10 @@
                         <el-dropdown trigger="click" @command="handleCommand">
                             <span class="el-dropdown-link">
                                 <img class="user-logo" src="../../static/img/cctv.png">
-                                {{username}}
                             </span>
-                            <el-dropdown-menu class="dropdown" slot="dropdown">
-                                <el-dropdown-item command="userCenter">个人中心</el-dropdown-item>
+                            <el-dropdown-menu class="dropdown" slot="dropdown" >
+                                
+                                <el-dropdown-item command="userCenter">{{username}}</el-dropdown-item>
                                 <el-dropdown-item command="loginout">退出</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
@@ -39,6 +39,7 @@ export default {
     data(){
         return{
             activeIndex: '1',
+            username:''
         }
     },
     methods: {
@@ -52,6 +53,7 @@ export default {
               localStorage.removeItem('teacherInfo')
               localStorage.removeItem('studentInfo')
               localStorage.removeItem('isLogin')
+              localStorage.removeItem('userName')
               this.$store.dispatch('changeLogin',false)
               this.username=''
               this.$router.push('/login');
@@ -59,20 +61,19 @@ export default {
               this.$router.push('/userCenter');
           }
       },
-
     },
     computed:{
         username(){
-            if(window.localStorage.getItem('leaderInfo')){
-                this.username =  JSON.parse(localStorage.getItem('leaderInfo')).sphone
+            if(window.localStorage.getItem('userName')){
+                this.username =  JSON.parse(localStorage.getItem('userName'))
                 
             }
-            else if(window.localStorage.getItem('teacherInfo')){
-                this.username =  JSON.parse(localStorage.getItem('teacherInfo')).tname
+            else if(window.localStorage.getItem('userName')){
+                this.username =  JSON.parse(localStorage.getItem('userName'))
                 
             }
-            else if(window.localStorage.getItem('studentInfo')){
-                this.username =  JSON.parse(localStorage.getItem('studentInfo')).sname
+            else if(window.localStorage.getItem('userName')){
+                this.username =  JSON.parse(localStorage.getItem('userName'))
                 
             }
             else{
@@ -108,7 +109,7 @@ export default {
     position: fixed;
     width: 100%;
     height: auto;
-    top: 0;
+    top: 0px;
     overflow:visible;
 }
     .user-info .user-logo{

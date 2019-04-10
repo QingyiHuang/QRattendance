@@ -6,8 +6,8 @@
 export default {
     //state
     state:{
-        username:'',
-        isLogin:'',
+        username:'未登陆',
+        isLogin:0,
     },
     //mutation改变数据的方法
     mutations:{

@@ -5,6 +5,7 @@ import Teacher from '@/components/teacher'
 import Student from '@/components/student'
 import Leader from '@/components/leader'
 import notFound from '@/components/notFound'
+import userCenter from '@/components/userCenter'
 
 Vue.use(Router)
 
@@ -26,10 +27,21 @@ export default new Router({
       name: 'Teacher',
       component: Teacher
     },
-    {
-      path: '/student',
+    { 
+      path: '/student', 
       name: 'Student',
-      component: Student
+      component: Student, 
+      props: (route) => ({ did: route.query.did,time: route.query.time})
+    },
+    // {
+    //   path: '/student',
+    //   name: 'Student',
+    //   component: Student
+    // },
+    {
+      path: '/userCenter',
+      name: 'UserCenter',
+      component: userCenter
     },
     {
       path:'*',

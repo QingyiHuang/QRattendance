@@ -24,6 +24,7 @@ footer{
     position: fixed;
     bottom: 0;
     width: 100%;
+    z-index: 99999999999;
 }
 .footerBar{
     padding-top: 20px;

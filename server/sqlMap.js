@@ -14,7 +14,10 @@ var sqlMap = {
   },
   student: {
     query: 'select * from student where sphone = ? and spassword = ?',
-    record_qd: 'INSERT INTO qdrecord(studentno,qdate,qtime,qstarttime) VALUES (?,?,?,?)'
+    record_qd: 'INSERT INTO qdrecord(studentno,qdate,qtime,qstarttime,qteachermsg) VALUES (?,?,?,?,?)',
+    querybyname: 'select s.sname,s.ssex,s.sphone, q.qdate,q.qteachermsg'
+    +' from qdrecord q,student s where q.studentno = s.sno  and  s.sno= ?',
+    // 'select * from qdrecord where studentno = ?'
   }
 }
 

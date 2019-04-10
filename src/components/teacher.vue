@@ -2,8 +2,8 @@
   <div class="con">
     <el-row class="teacher_con">
       
-      <el-col :md="{span:4,offset:4}" :xs="{span:8}" :sm="{span:8}">
-        <h4>欢迎您：{{teacherName}}</h4>
+      <el-col :md="{span:4,offset:4}" :xs="{span:24}" :sm="{span:8}">
+        <h6>欢迎您：{{teacherName}}</h6>
           <!-- 适配窗口大小的的垂直导航 -->
         <el-menu default-active="1" class="el-menu-vertical-demo" theme="dark">
           <el-menu-item index="1" @click="classinfo">
@@ -19,7 +19,7 @@
         </el-menu>
       </el-col>
       <!-- 右半部为两个标签页，分别设置displayblock和none -->
-      <el-col  :md="{span: 12}" :xs="{span:16}" :sm="{span:16}">
+      <el-col  :md="{span: 12}" :xs="{span:24}" :sm="{span:16}">
         
           <!-- 注册count 为默认显示tab 里面有两个小tab-->
         <div ref="count" style="display:block">
@@ -46,7 +46,7 @@
               <el-button type="info" icon="h-icon-search" :radius="true" class="searchBtn" @click="queryRecord">查询所有签到信息</el-button>
               <!-- 表格，用来陈列签到数据 -->
               <div style="margin-top:10px">
-                <el-table :data="recordArr" height="500" tooltip-effect="dark" border style="width: 100%">
+                <el-table :data="recordArr"  tooltip-effect="dark" border='false' style="width: 100%">
                   <el-table-column prop="sname" label="姓名" width="80">
                   </el-table-column>
                   <el-table-column prop="ssex" label="性别" width="80">
@@ -55,7 +55,7 @@
                   </el-table-column>
                   <el-table-column prop="qdate" label="考勤时间" width="230">
                   </el-table-column>
-                  <el-table-column prop="ss" label="考勤状态">
+                  <el-table-column prop="qteachermsg" label="考勤状态">
                   </el-table-column>
                 </el-table>
               </div>
@@ -87,7 +87,7 @@ export default {
       return{
         teacherName: '',
         disabled: true,
-        qrUrl: 'http://10.196.76.127:8080',//ip地址每天都在变化
+        qrUrl: 'http://192.168.191.1:8080',//ip地址每天都在变化
         scale: 1,//二维码缩放大小
         list: [],
         listVaule: '',//教师选择班级的时候会获取到班级的信息
@@ -204,7 +204,7 @@ export default {
           correctLevel: QRCode.CorrectLevel.H, //容错级别
           useSVG: true
         })
-          qrcode.makeCode(url+'?cid='+cid+'&time='+time)
+          qrcode.makeCode(url+'?did='+cid+'&time='+time)
       },
       // 放大或者缩小
       zoom(num) {
@@ -243,6 +243,7 @@ export default {
       logout() {
         window.localStorage.removeItem('teacherInfo')
         window.localStorage.removeItem('isLogin')
+        localStorage.removeItem('userName')
         this.$router.push('/login')
       }
     }
@@ -253,6 +254,8 @@ export default {
     font-size: 2em;
 }
 .qr_img {
+  margin: 0 auto;
+  text-align: center;
   margin-top: 20px;
 }
 .searchBtn{

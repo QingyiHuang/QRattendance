@@ -23,9 +23,9 @@ var jsonWrite = function(res, ret) {
 // 进行签到
 router.post('/recordQd', (req, res) => {
     var sql = $sql.student.record_qd;
-    var params = req.body;
+    var params = req.body;//传入四个数据，
     console.log(params);
-    conn.query(sql, [params.classno], function(err, result) {
+    conn.query(sql, [params.studentno,params.qdate,params.qtime,params.qstarttime,params.qteachermsg], function(err, result) {
         if (err) {
             console.log(err);
         }
