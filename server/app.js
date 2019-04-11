@@ -9,6 +9,9 @@ const dictionaryAdd = require('./api/dictionaryAdd');
 const recordQuery = require('./api/recordQuery');
 const recordQd = require('./api/recordQd');
 const recordbyName = require('./api/recordbyName');
+const echartTimes = require('./api/echartTimes.js')
+const echartPeople = require('./api/echartPeople.js')
+
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -37,6 +40,8 @@ app.use('/api/dictionary', dictionaryAdd);
 app.use('/api/record', recordQuery);
 app.use('/api/record', recordQd);
 app.use('/api/recordbyname',recordbyName);
+app.use('/api/echart',echartTimes);
+app.use('/api/echart',echartPeople);
 
 // 监听端口
 app.listen(3000);

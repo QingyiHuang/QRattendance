@@ -4,7 +4,7 @@
             
             <el-menu theme="dark" router :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-col :span="10" :offset="6" >
-                        <el-menu-item index="/" >首页</el-menu-item>
+                        <el-menu-item index="/index" >首页</el-menu-item>
                         <el-menu-item index="/attandanceList">签到展示</el-menu-item>
                     </el-col>
 
@@ -111,6 +111,7 @@ export default {
     height: auto;
     top: 0px;
     overflow:visible;
+    z-index: 1;
 }
     .user-info .user-logo{
         

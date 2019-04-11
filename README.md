@@ -1,4 +1,45 @@
-# demo
+#### Echarts.js数据可视化
+
+```javascript
+cnpm install echarts --save //安装Echarts
+```
+
+```javascript
+//引入Echarts
+var echarts = reuqire('echarts')
+
+//使用
+mounted(){
+    var myChart = echarts.init(document.getElementById('chartContainer'))//通过vue上一个id为上述的容器来初始化echarts
+    
+//绘制图表
+    myChart.setOption({
+        title:{ text:'Echart 二维表' },
+        tooltip:{},
+        xAxis:{//x轴
+            data:["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        }
+        yAxis:{//y轴
+        	
+    	},
+                      series:[{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+                      }]
+    })
+}
+```
+
+
+
+#### mysql 部分联结查询
+
+```sql
+UNION ALL 比 UNION 所耗资源更少，
+UNION ALL 不会去掉重复项
+UNION 会除掉重复
+```
 
 ie情况下
 第一步：下载插件： cnpm install --save babel-polyfill

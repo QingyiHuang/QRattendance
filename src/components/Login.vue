@@ -186,7 +186,11 @@ export default {
         this.$router.push("/teacher")
       }
       else if(window.localStorage.getItem('studentInfo')){
-        this.$router.push("/student")
+        let qstarttime = GetQueryString('time')
+        let did = JSON.parse(window.localStorage.getItem('studentInfo')).sno
+        this.$router.push({
+          path: `/student?did=`+did+`&time=`+qstarttime
+        })
       }
       else if(window.localStorage.getItem('leaderInfo')){
         this.$router.push("/leader")

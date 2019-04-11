@@ -6,6 +6,8 @@ import Student from '@/components/student'
 import Leader from '@/components/leader'
 import notFound from '@/components/notFound'
 import userCenter from '@/components/userCenter'
+import attandanceList from '@/components/attandanceList' //Echart view
+import index from '@/components/index'
 
 Vue.use(Router)
 
@@ -16,6 +18,16 @@ export default new Router({
       path: '/',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/index',
+      name: 'index',
+      component: index
+    },
+    {
+      path: '/attandanceList',
+      name: 'AttandanceList',
+      component: attandanceList
     },
     {
       path:'/login',

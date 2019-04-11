@@ -1,8 +1,5 @@
 <template>
     <div class="banTextOnblur">
-        <p>
-            几秒后自动跳转到首页。使用mounted设置setTimeout函数 push router
-        </p>
         <div class="circle">
             <h4>
                 404 notFound !

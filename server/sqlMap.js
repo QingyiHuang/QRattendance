@@ -18,6 +18,15 @@ var sqlMap = {
     querybyname: 'select s.sname,s.ssex,s.sphone, q.qdate,q.qteachermsg'
     +' from qdrecord q,student s where q.studentno = s.sno  and  s.sno= ?',
     // 'select * from qdrecord where studentno = ?'
+  },
+  echart: {
+    echart_time: ' select count(q.qdate) as times from qdrecord q  where q.qdate like ? ' +
+    'union all select count(q.qdate) as times from qdrecord q  where q.qdate like ?' +
+    'union all select count(q.qdate) as times from qdrecord q  where q.qdate like ?' + 
+    'union all select count(q.qdate) as times from qdrecord q  where q.qdate like ?' +
+    'union all select count(q.qdate) as times from qdrecord q  where q.qdate like ?' ,
+    echart_people: 'select count(q.qteachermsg) as 正常 from qdrecord q where q.qteachermsg = `正常`' +
+    'union all select count(q.qteachermsg) as 迟到 from qdrecord q where q.qteachermsg like `%迟到%`',
   }
 }
 
