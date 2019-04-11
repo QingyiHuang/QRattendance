@@ -24,7 +24,7 @@ router.post('/echartPeople', (req, res) => {
     var sql = $sql.echart.echart_people;
     var params = req.body; 
     console.log(params);
-    conn.query(sql,function(err, result) {
+    conn.query(sql,['正常','迟到%'],function(err, result) {
         if (err) {
             console.log(err);
         }

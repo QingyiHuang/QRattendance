@@ -26,7 +26,7 @@
 <script>
 // 引入 ECharts 模块
 import echarts from 'echarts'
- 
+import { GetQueryString } from '@/util/getUrlParam.js'
 export default {
     name: "about",
     data() {

@@ -13,6 +13,7 @@
                         <el-dropdown trigger="click" @command="handleCommand">
                             <span class="el-dropdown-link">
                                 <img class="user-logo" src="../../static/img/cctv.png">
+                                {{username}}
                             </span>
                             <el-dropdown-menu class="dropdown" slot="dropdown" >
                                 
@@ -62,24 +63,29 @@ export default {
           }
       },
     },
-    computed:{
-        username(){
-            if(window.localStorage.getItem('userName')){
-                this.username =  JSON.parse(localStorage.getItem('userName'))
+    // computed:{
+    //     username(){
+    //         if(window.localStorage.getItem('userName')){
+    //             this.username =  JSON.parse(localStorage.getItem('userName'))
                 
-            }
-            else if(window.localStorage.getItem('userName')){
-                this.username =  JSON.parse(localStorage.getItem('userName'))
+    //         }
+    //         else if(window.localStorage.getItem('userName')){
+    //             this.username =  JSON.parse(localStorage.getItem('userName'))
                 
-            }
-            else if(window.localStorage.getItem('userName')){
-                this.username =  JSON.parse(localStorage.getItem('userName'))
+    //         }
+    //         else if(window.localStorage.getItem('userName')){
+    //             this.username =  JSON.parse(localStorage.getItem('userName'))
                 
-            }
-            else{
-                this.username =  this.$store.getters['getUserName']
-            }
-        }
+    //         }
+    //         else{
+    //             this.username =  this.$store.getters['getUserName']
+    //         }
+    //     }
+    // },
+    created(){
+        let N = window.localStorage.getItem('userName')
+        this.$store.dispatch('changeUserName',N)
+        this.username = this.$store.getters['getUserName']
     }
     // watch:{
     //     username(){

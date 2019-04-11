@@ -25,8 +25,8 @@ var sqlMap = {
     'union all select count(q.qdate) as times from qdrecord q  where q.qdate like ?' + 
     'union all select count(q.qdate) as times from qdrecord q  where q.qdate like ?' +
     'union all select count(q.qdate) as times from qdrecord q  where q.qdate like ?' ,
-    echart_people: 'select count(q.qteachermsg) as 正常 from qdrecord q where q.qteachermsg = `正常`' +
-    'union all select count(q.qteachermsg) as 迟到 from qdrecord q where q.qteachermsg like `%迟到%`',
+    echart_people: 'select count(q.qteachermsg) as nn from qdrecord q where q.qteachermsg = ?' +
+    'union all select count(r.qteachermsg) as nn from qdrecord r where r.qteachermsg like ?',
   }
 }
 
