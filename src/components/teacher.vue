@@ -241,10 +241,13 @@ export default {
       },
       //用户登出  建议后期加入模态框。
       logout() {
-        window.localStorage.removeItem('teacherInfo')
-        window.localStorage.removeItem('isLogin')
+        //清理storage，同时改动vuex里面的islogin状态可以响应改变
+        localStorage.removeItem('teacherInfo')
+        localStorage.removeItem('isLogin')
         localStorage.removeItem('userName')
-        this.$router.push('/login')
+        this.$store.dispatch('changeLogin',false)
+        this.$store.dispatch('changeUserName','未登陆')
+        this.$router.push('/login');
       }
     }
 }

@@ -17,6 +17,7 @@
     "body-parser": "^1.18.3",
     "echarts": "^4.2.1",
     "express": "^4.16.4",
+    "formidable": "^1.2.1",
     "hui": "^2.0.0-alpha.8",
     "mysql": "^2.16.0",
     "vue": "^2.5.2",

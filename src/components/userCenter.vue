@@ -1,8 +1,13 @@
 <template>
     <div>
         <navbar/>
+        <!-- <el-upload
+        class = "avatar-uploader"
+        action = 
+        >
 
-        
+        </el-upload>
+         -->
         <h4>更改头像</h4>
         用户中心，这里主要是展示用户数据，显示签到使用,针对本人的签到情况
         <el-row>

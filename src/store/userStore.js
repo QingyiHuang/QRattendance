@@ -7,14 +7,16 @@ export default {
     //state
     state:{
         username:'未登陆',
-        isLogin:0,
+        isLogin:false,
     },
     //mutation改变数据的方法
     mutations:{
         cName(state,uname){
+            localStorage.setItem('userName',uname)
             state.username = uname
         },
         cLogin(state,flag){
+            localStorage.setItem('isLogin',flag)
             state.isLogin = flag
         }
     },
@@ -30,10 +32,18 @@ export default {
     //getters 设施，获取数据的方式，获取state的方法
     getters:{
         getUserName(state){
-            return state.username
+            if(!state.username){
+                return state.username = JSON.parse(localStorage.getItem('userName'))
+            }else{
+                return state.username
+            }
         },
         getLoginStatus(state){
-            return state.isLogin
+            if(!state.isLogin){
+                return state.isLogin = JSON.parse(localStorage.getItem('isLogin'))
+            }else{
+                return state.isLogin
+            }
         }
     }
 }

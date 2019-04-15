@@ -1,17 +1,17 @@
 {
     "images":[
         {
-            "src":"http://localhost:8080/static/img/safari.png",
+            "src":"http://192.168.191.1:8080/static/img/safari.png",
             "href":"http://www.127.0.0.1:8080",
             "alt":"safari浏览器"
         },
         {
-            "src":"http://localhost:8080/static/img/skype.png",
+            "src":"http://192.168.191.1:8080/static/img/skype.png",
             "href":"http://www.127.0.0.1:8080",
             "alt":"skype软件"
         },
         {
-            "src":"http://localhost:8080/static/img/Photoshop.png",
+            "src":"http://192.168.191.1:8080/static/img/Photoshop.png",
             "href":"http://www.127.0.0.1:8080",
             "alt":"photoshop软件"
         }

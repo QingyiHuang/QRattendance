@@ -97,10 +97,12 @@ export default {
             this.$router.push("/userCenter")
         },
         logout(){
-            window.localStorage.removeItem('studentInfo')
-            window.localStorage.removeItem('isLogin')
+            localStorage.removeItem('studentInfo')
+            localStorage.removeItem('isLogin')
             localStorage.removeItem('userName')
-            this.$router.push('/login')
+            this.$store.dispatch('changeLogin',false)
+            this.$store.dispatch('changeUserName','未登陆')
+            this.$router.push('/login');
         }
     },
     created(){

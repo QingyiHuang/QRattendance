@@ -31,7 +31,7 @@ mounted(){
 }
 ```
 
-
+#### formidable 处理用户头像上传
 
 #### mysql 部分联结查询
 
@@ -54,7 +54,9 @@ entrymodule.exports = {
 }
 ```
 
+4/15
 
+做点自适应，然后在项目中增加路由导航守卫，结合vuex和localStorage做用户权限。将样式做的更加符合HUI的主题/风格
 
 
 

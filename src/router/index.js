@@ -11,7 +11,7 @@ import index from '@/components/index'
 
 Vue.use(Router)
 
-export default new Router({
+export default new Router({//设置权限路由
   mode: 'history',
   routes: [
     {
