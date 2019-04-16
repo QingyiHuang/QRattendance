@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-04-08 18:31:59
+Date: 2019-04-16 11:21:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -94,64 +94,42 @@ DROP TABLE IF EXISTS `qdrecord`;
 CREATE TABLE `qdrecord` (
   `qid` int(11) NOT NULL AUTO_INCREMENT,
   `studentno` int(11) DEFAULT NULL,
-  `qdate` text,
+  `qdate` datetime DEFAULT NULL,
   `qtime` time DEFAULT NULL,
   `qstarttime` time DEFAULT NULL,
-  `qteachermsg` int(2) DEFAULT NULL COMMENT '如果有直九表示 缺勤',
+  `qteachermsg` text COMMENT '如果有直九表示 缺勤',
   PRIMARY KEY (`qid`)
-) ENGINE=InnoDB AUTO_INCREMENT=560 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 ROW_FORMAT=REDUNDANT;
 
 -- ----------------------------
 -- Records of qdrecord
 -- ----------------------------
-INSERT INTO `qdrecord` VALUES ('512', '128', '2019-04-03 00:00:00', '14:47:59', '00:00:00', null);
-INSERT INTO `qdrecord` VALUES ('513', '100', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('514', '119', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('515', '120', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('516', '121', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('517', '122', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('518', '123', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('519', '124', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('520', '125', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('521', '126', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('522', '127', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('523', '129', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('524', '990', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('525', '991', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('526', '992', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('527', '993', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('528', '994', '2019-04-03 00:00:00', '00:00:00', '15:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('529', '128', '2019-04-03 00:00:00', '14:50:58', '17:36:51', null);
-INSERT INTO `qdrecord` VALUES ('530', '128', '2019-04-03 00:00:00', '15:03:42', '14:00:00', null);
-INSERT INTO `qdrecord` VALUES ('531', '120', '2019-04-03 00:00:00', '15:03:43', '14:00:00', null);
-INSERT INTO `qdrecord` VALUES ('532', '119', '2019-04-03 00:00:00', '15:03:57', '14:00:00', null);
-INSERT INTO `qdrecord` VALUES ('533', '991', '2019-04-03 00:00:00', '15:03:58', '14:00:00', null);
-INSERT INTO `qdrecord` VALUES ('534', '994', '2019-04-03 00:00:00', '15:04:09', '14:00:00', null);
-INSERT INTO `qdrecord` VALUES ('535', '123', '2019-04-03 00:00:00', '15:04:12', '14:00:00', null);
-INSERT INTO `qdrecord` VALUES ('536', '127', '2019-04-03 00:00:00', '15:04:22', '14:00:00', null);
-INSERT INTO `qdrecord` VALUES ('537', '994', '2019-04-03 00:00:00', '15:06:54', '16:00:00', null);
-INSERT INTO `qdrecord` VALUES ('538', '128', '2019-04-03 00:00:00', '15:06:55', '16:00:00', null);
-INSERT INTO `qdrecord` VALUES ('539', '123', '2019-04-03 00:00:00', '15:06:55', '16:00:00', null);
-INSERT INTO `qdrecord` VALUES ('540', '127', '2019-04-03 00:00:00', '15:07:05', '16:00:00', null);
-INSERT INTO `qdrecord` VALUES ('541', '120', '2019-04-03 00:00:00', '15:07:06', '16:00:00', null);
-INSERT INTO `qdrecord` VALUES ('542', '119', '2019-04-03 00:00:00', '15:07:08', '16:00:00', null);
-INSERT INTO `qdrecord` VALUES ('543', '121', '2019-04-03 00:00:00', '15:07:09', '16:00:00', null);
-INSERT INTO `qdrecord` VALUES ('544', '129', '2019-04-03 00:00:00', '15:07:39', '16:00:00', null);
-INSERT INTO `qdrecord` VALUES ('545', '121', '2019-04-03 00:00:00', '13:00:00', '11:00:00', null);
-INSERT INTO `qdrecord` VALUES ('546', '100', '2019-04-03 00:00:00', '00:00:00', '16:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('547', '122', '2019-04-03 00:00:00', '00:00:00', '16:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('548', '124', '2019-04-03 00:00:00', '00:00:00', '16:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('549', '125', '2019-04-03 00:00:00', '00:00:00', '16:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('550', '126', '2019-04-03 00:00:00', '00:00:00', '16:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('551', '990', '2019-04-03 00:00:00', '00:00:00', '16:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('552', '991', '2019-04-03 00:00:00', '00:00:00', '16:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('553', '992', '2019-04-03 00:00:00', '00:00:00', '16:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('554', '993', '2019-04-03 00:00:00', '00:00:00', '16:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('555', '995', '2019-04-03 00:00:00', '00:00:00', '16:00:00', '1');
-INSERT INTO `qdrecord` VALUES ('556', '121', '2019-04-03 00:00:00', '15:20:02', '14:00:00', null);
-INSERT INTO `qdrecord` VALUES ('557', '120', '2019-04-03 00:00:00', '20:40:29', '13:00:00', null);
-INSERT INTO `qdrecord` VALUES ('558', '120', '2019-04-03 00:00:00', '20:44:36', '09:00:00', null);
-INSERT INTO `qdrecord` VALUES ('559', '119', '2019-04-03 17:19:08', '17:19:08', '16:00:00', null);
+INSERT INTO `qdrecord` VALUES ('1', '119', '2019-04-10 15:36:58', '15:36:58', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('2', '120', '2019-04-10 15:45:44', '15:45:44', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('3', '119', '2019-04-10 15:45:44', '15:54:55', '15:00:00', '迟到54分钟');
+INSERT INTO `qdrecord` VALUES ('4', '120', '2019-04-11 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('5', '121', '2019-04-11 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('6', '124', '2019-04-11 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('7', '122', '2019-04-11 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('8', '124', '2019-04-11 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('9', '127', '2019-04-11 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('10', '129', '2019-04-11 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('11', '128', '2019-04-09 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('12', '120', '2019-04-09 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('13', '127', '2019-04-12 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('14', '127', '2019-04-12 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('15', '129', '2019-04-12 15:45:44', '15:54:55', '16:00:00', '迟到');
+INSERT INTO `qdrecord` VALUES ('16', '129', '2019-04-09 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('17', '128', '2019-04-10 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('18', '128', '2019-04-08 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('19', '120', '2019-04-09 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('20', '121', '2019-04-10 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('21', '119', '2019-04-09 15:45:44', '15:54:55', '16:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('22', '119', '2019-04-08 11:07:46', '11:07:46', '12:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('23', '119', '2019-04-11 11:19:25', '11:19:25', '11:00:00', '迟到19分钟');
+INSERT INTO `qdrecord` VALUES ('24', '119', '2019-04-11 11:27:05', '11:27:05', '11:00:00', '迟到27分钟');
+INSERT INTO `qdrecord` VALUES ('25', '119', '2019-04-15 11:19:36', '11:19:36', '12:00:00', '正常');
+INSERT INTO `qdrecord` VALUES ('26', '119', '2019-04-15 16:01:51', '16:01:51', '17:00:00', '正常');
 
 -- ----------------------------
 -- Table structure for qingjiarecord
@@ -167,7 +145,7 @@ CREATE TABLE `qingjiarecord` (
   `teacherno` int(11) DEFAULT NULL,
   `qshiyou` int(255) DEFAULT NULL COMMENT '0事假 1 病假',
   PRIMARY KEY (`qid`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qingjiarecord
@@ -264,6 +242,6 @@ CREATE TABLE `teacherclass` (
 -- Records of teacherclass
 -- ----------------------------
 INSERT INTO `teacherclass` VALUES ('30', '34', '37');
-INSERT INTO `teacherclass` VALUES ('31', '35', '37');
-INSERT INTO `teacherclass` VALUES ('32', '36', '37');
-INSERT INTO `teacherclass` VALUES ('33', '37', '37');
+INSERT INTO `teacherclass` VALUES ('31', '35', '38');
+INSERT INTO `teacherclass` VALUES ('32', '35', '39');
+INSERT INTO `teacherclass` VALUES ('33', '35', '37');
