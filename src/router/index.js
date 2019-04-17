@@ -8,6 +8,7 @@ import notFound from '@/components/notFound'
 import userCenter from '@/components/userCenter'
 import attandanceList from '@/components/attandanceList' //Echart view
 import index from '@/components/index'
+import qingjia from '@/components/qingjia'
 
 Vue.use(Router)
 
@@ -56,7 +57,12 @@ export default new Router({//设置权限路由
       component: userCenter
     },
     {
-      path:'*',
+      path: '/qingjia',
+      name: 'qingjia',
+      component: qingjia
+    },
+    {
+      path: '*',
       component: notFound
     }
   ]

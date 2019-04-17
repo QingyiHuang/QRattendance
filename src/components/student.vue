@@ -18,7 +18,7 @@
         
         <el-row class="student_btns">
             <el-button class="diybtn" type="success" size="large" @click="qd">点击签到</el-button>
-            <el-button class="diybtn" type="primary" size="large">请假</el-button>
+            <el-button class="diybtn" type="primary" size="large" @click="qingjia">请假</el-button>
             <el-button class="diybtn" type="primary" size="large" @click="toUserCenter">个人中心</el-button>
             <el-button class="diybtn" type="primary" size="large" @click="toUserCenter">查看考勤</el-button>
             <el-button class="diybtn" type="primary" size="large" @click="logout">用户注销</el-button>
@@ -92,6 +92,9 @@ export default {
           }
         })
       }
+    },
+    qingjia(){
+        this.$router.push('/qingjia')
     },
         toUserCenter(){
             this.$router.push("/userCenter")

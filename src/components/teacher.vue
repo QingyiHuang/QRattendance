@@ -60,6 +60,23 @@
                 </el-table>
               </div>
             </el-tab-pane>
+
+            <!-- 小tab页3 -->
+            <el-tab-pane label="请假记录">
+              <!-- 表格，请假数据 -->
+              <div style="margin-top:10px">
+                <el-table :data="qingjiaArr"  tooltip-effect="dark" border='false' style="width: 100%">
+                  <el-table-column prop="sname" label="姓名" width="80">
+                  </el-table-column>
+                  <el-table-column prop="qtype" label="请假类型" width="80">
+                  </el-table-column>
+                  <el-table-column prop="qres" label="请假原因" width="230">
+                  </el-table-column>
+                  <el-table-column prop="qdate" label="请假时间" width="150">
+                  </el-table-column>
+                </el-table>
+              </div>
+            </el-tab-pane>
           </el-tabs>
         </div>
         <!-- 默认隐藏注册节点 隐藏tab 注册为manage-->
@@ -82,6 +99,7 @@
 <script>
 //导入二维码库
 import QRCode from '@/util/qrcode'
+import {toDateTime} from '@/util/toDateTime.js'
 export default {
     data(){
       return{
@@ -143,6 +161,7 @@ export default {
         ],//获取上课时间节点，应该是后台发过来的
         startTime:'',
         recordArr:[],
+        qingjiaArr:[],
       }
     },
     created(){//当没有权限的时候就push到首页，从localStorage里面找信息
@@ -164,6 +183,21 @@ export default {
         //获取班级的编号 传入教师id找到所管理的班级信息
         let data = {'id': JSON.parse(window.localStorage.getItem('teacherInfo')).tid}
         //console.log(data)
+        // this.$axios.all([
+        //   this.$axios.post('/api/class/teacherClass',data),
+        //   this.$axios.post('/api/record/qingjiaquery')
+        // ])
+        // .then(this.$axios.spread(function(res1,res2){
+        //   var listObj = {}
+        //   for (let i = 0; i < res1.data.length; i++) {
+        //     listObj.label = res1.data[i].did + '编号' + res1.data[i].dnjname + '级' + res1.data[i].dzyname + '专业' + res1.data[i].dbjname + '班级'
+        //     listObj.value = res1.data[i].did + '编号' + res1.data[i].dnjname + '级' + res1.data[i].dzyname + '专业' + res1.data[i].dbjname + '班级'
+        //     if (this.list.length === 0) {
+        //       this.list.push(listObj)
+        //     }
+        //   }
+        //   console.log(res2.data)
+        // }))
         this.$axios.post('/api/class/teacherClass',data)
         .then((res)=>{
           //console.log(res.data)
@@ -174,6 +208,15 @@ export default {
             if (this.list.length === 0) {
               this.list.push(listObj)
             }
+          }
+        }).catch((err)=>{
+          console.log(err)
+        })
+        this.$axios.post('/api/record/qingjiaquery')
+        .then((res)=>{
+          this.qingjiaArr = res.data
+          for(let key in qingjiaArr){
+            qingjiaArr[key].qdate = toDateTime(qingjiaArr[key].qdate)
           }
         }).catch((err)=>{
           console.log(err)

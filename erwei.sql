@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-04-16 11:21:51
+Date: 2019-04-17 18:29:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -138,20 +138,21 @@ DROP TABLE IF EXISTS `qingjiarecord`;
 CREATE TABLE `qingjiarecord` (
   `qid` int(11) NOT NULL AUTO_INCREMENT,
   `studentno` int(11) DEFAULT NULL,
-  `qres` varchar(255) DEFAULT NULL,
+  `sname` text,
+  `qtype` text,
+  `qres` text,
   `qdate` datetime DEFAULT NULL,
-  `qisread` int(1) DEFAULT '1' COMMENT '1表示未读  0表示已读',
-  `qresult` int(1) DEFAULT NULL COMMENT '0 同意  1不同意',
   `teacherno` int(11) DEFAULT NULL,
-  `qshiyou` int(255) DEFAULT NULL COMMENT '0事假 1 病假',
   PRIMARY KEY (`qid`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qingjiarecord
 -- ----------------------------
-INSERT INTO `qingjiarecord` VALUES ('67', '127', '11', '2019-04-08 00:00:00', '1', null, '34', '1');
-INSERT INTO `qingjiarecord` VALUES ('68', '120', '病了', '2019-04-08 21:04:00', '0', '0', '34', '1');
+INSERT INTO `qingjiarecord` VALUES ('67', '127', '林婧雯', '事假', '我要去购物', '2019-04-08 00:00:00', '34');
+INSERT INTO `qingjiarecord` VALUES ('68', '120', '张淑然', '病假', '病了', '2019-04-08 21:04:00', '34');
+INSERT INTO `qingjiarecord` VALUES ('69', '119', '黄卿怡', '事假', '今晚不上课', '2019-04-18 21:37:17', '34');
+INSERT INTO `qingjiarecord` VALUES ('70', '119', '黄卿怡', '事假', '时间已不再', '2019-04-19 17:52:31', '34');
 
 -- ----------------------------
 -- Table structure for starttime

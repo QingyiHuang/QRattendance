@@ -165,7 +165,7 @@ export default {
     height: auto;
     top: 0px;
     overflow:visible;
-    z-index: 1;
+    z-index: 4;
 }
     .user-info .user-logo{
         

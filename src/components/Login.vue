@@ -1,34 +1,50 @@
 <template>
-  <div>
-    <img src="@/assets/img/quicktime.png" class="qtp">
-    <el-row class="login">
-      <el-col :md="{span: 10, offset: 7}" :sm="{span: 12,offset: 6}" :lg="{span: 8,offset: 8}" :xs="{span: 20,offset: 2}">
-      <!-- 将待提交的表单注册一个DOM对象 ref=form -->
-      <el-form :model="form" :label-position="labelPosition" ref="form" :rules="rules" label-width="100px">
-        <!-- 手机号码输入框 验证规则phoneNum -->
-        <el-form-item id="phone" label="手机号码：" @focus="scrollPhone" prop='phoneNum'>
-          <el-input v-model.number="form.phoneNum" type="text" placeholder="手机号码">
-          </el-input>
-        </el-form-item>
-        <!-- 密码输入框 验证规则passWord-->
-        <el-form-item label="用户密码：" @focus="scrollPhone" prop='passWord'>
-          <el-input v-model="form.passWord" type="password" placeholder="用户密码">
-          </el-input>
-        </el-form-item>
-        <!-- 用户身份，这里分教师，领导学生，采用radio-group，但需要包裹在form-item里面 identity验证规则 -->
-        <el-form-item label="用户身份：" prop="identity">
-          <el-radio-group v-model="form.identity" :size="small" class="radio-group">
-            <!-- <el-radio class="radio" label="领导"></el-radio> -->
-            <el-radio class="radio" label="教师"></el-radio>
-            <el-radio class="radio" label="学生"></el-radio>
-          </el-radio-group>
-        </el-form-item>
-      </el-form>
-      <!-- 两个按钮作为提交和重置使用 分别触发Login和reset方法，样式是primary -->
-      <el-button type="primary" @click="Login('form')" size="large" style="width:1.5em">登录</el-button>
-      <el-button type="primary" @click="reset('form')" size="large" style="width:1.5em">取消</el-button>
-    </el-col>
-    </el-row>
+  <div class="video-container">
+
+      <div class="filter" :style="fixStyle">
+      </div>
+    
+      <!-- 背景组 -->
+      <video :style="fixStyle" autoplay loop v-on:canplay="canplay">
+      <source src="@/assets/movie/Feeling-the-Air.mp4" type="video/mp4"/>
+      浏览器不支持 video 标签，建议升级浏览器。
+      <source src="@/assets/movie/Feeling-the-Air.mp4" type="video/webm"/>
+      浏览器不支持 video 标签，建议升级浏览器。
+      </video>
+      <!-- <div class="poster hidden" v-if="!vedioCanPlay">
+        <img :style="fixStyle" src="@/assets/movie/Sunset-Couple.jpg" alt="">
+      </div> -->
+      <div class="loginForm">
+        <img src="@/assets/img/quicktime.png" class="qtp">
+        <el-row class="login" >
+          <el-col :md="{span: 10, offset: 7}" :sm="{span: 12,offset: 6}" :lg="{span: 8,offset: 8}" :xs="{span: 20,offset: 2}">
+          <!-- 将待提交的表单注册一个DOM对象 ref=form -->
+          <el-form :model="form" :label-position="labelPosition" ref="form" :rules="rules" label-width="100px">
+            <!-- 手机号码输入框 验证规则phoneNum -->
+            <el-form-item id="phone" label="手机号码：" @focus="scrollPhone" prop='phoneNum'>
+              <el-input v-model.number="form.phoneNum" type="text" placeholder="手机号码">
+              </el-input>
+            </el-form-item>
+            <!-- 密码输入框 验证规则passWord-->
+            <el-form-item  style="color: #ffffff" label="用户密码：" @focus="scrollPhone" prop='passWord'>
+              <el-input v-model="form.passWord" type="password" placeholder="用户密码">
+              </el-input>
+            </el-form-item>
+            <!-- 用户身份，这里分教师，领导学生，采用radio-group，但需要包裹在form-item里面 identity验证规则 -->
+            <el-form-item label="用户身份：" prop="identity">
+              <el-radio-group v-model="form.identity" :size="small" class="radio-group">
+                <!-- <el-radio class="radio" label="领导"></el-radio> -->
+                <el-radio class="radio" label="教师"></el-radio>
+                <el-radio class="radio" label="学生"></el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-form>
+          <!-- 两个按钮作为提交和重置使用 分别触发Login和reset方法，样式是primary -->
+          <el-button type="primary" @click="Login('form')" size="large" style="width:1.5em">登录</el-button>
+          <el-button type="primary" @click="reset('form')" size="large" style="width:1.5em">取消</el-button>
+        </el-col>
+        </el-row>
+      </div>
   </div>
 </template>
 
@@ -60,7 +76,10 @@ export default {
       form: {
         phoneNum: '',
         passWord: '',
-        identity: ''
+        identity: '',
+        //背景样式和遮罩层
+        vedioCanPlay: false,
+        fixStyle: ''
       },
       rules: {
         phoneNum: [
@@ -173,8 +192,10 @@ export default {
       this.$router.push({
         path: `/student/#phone/?did=`+did+`&time=`+qstarttime
       })
+    },
+    canplay() {
+      this.vedioCanPlay = true
     }
-    
   },
   components: {
   },
@@ -196,12 +217,47 @@ export default {
         this.$router.push("/leader")
       }
     }
+
+    //背景操作
+      window.onresize = () => {
+          //获取到window的body内宽高
+        const windowWidth = document.body.clientWidth
+        const windowHeight = document.body.clientHeight
+        //屏幕高宽比：定义视频宽高比
+        const windowAspectRatio = windowHeight / windowWidth
+        //定义视频宽高
+        let videoWidth
+        let videoHeight
+        //0.5625:1  =>9/16 初始化视频宽高
+        if (windowAspectRatio < 0.5625) {  
+          videoWidth = windowWidth
+          videoHeight = videoWidth * 0.5625
+          //定义遮罩层的样式，高度为body内宽高 按比率
+          this.fixStyle = {
+            height: windowWidth * 0.5625 + 'px',
+            width: windowWidth + 'px',
+
+            'margin-bottom': (windowHeight - videoHeight) / 2 + 'px',
+            'margin-left': 'initial'
+          }
+        } else {
+          videoHeight = windowHeight
+          videoWidth = videoHeight / 0.5625
+          this.fixStyle = {
+            height: windowHeight + 'px',
+            width: windowHeight / 0.5625 + 'px',
+            'margin-left': (windowWidth - videoWidth) / 2 + 'px',
+            'margin-bottom': 'initial'
+          }
+        }
+      }
+      window.onresize()
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .login{
   margin-top: 30px;
 }
@@ -217,4 +273,42 @@ export default {
 
 } */
 
+/* 添加背景 */
+  .video-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .video-container .filter {
+    position: absolute;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.4);
+    color: aliceblue;
+    width: 100%;
+    height: 100vh;
+    
+  }
+  .video-container .poster img,
+  .video-container video {
+    position: absolute; 
+    left: 0;
+    margin-left: 0;
+    z-index: 0;
+  }
+  .loginForm{
+    position: relative;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0);
+    color: #fff;
+    top: 30px;
+    width: 100%;
+    margin: 0 auto;
+  }
+label.el-form-item__label{
+  color: #fff;
+}
+.el-radio__label{
+ color: #fff;
+}
 </style>

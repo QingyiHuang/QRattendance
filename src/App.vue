@@ -53,6 +53,6 @@ export default {
   opacity: 0;
 }
 body {
-margin-bottom: 60px;
+margin-bottom: 40px;
 }
 </style>
