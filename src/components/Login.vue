@@ -5,7 +5,7 @@
       </div>
     
       <!-- 背景组 -->
-      <video :style="fixStyle" autoplay loop v-on:canplay="canplay">
+      <video :style="fixStyle" autoplay loop v-on:canplay="canplay" class="Nphone">
       <source src="@/assets/movie/Feeling-the-Air.mp4" type="video/mp4"/>
       浏览器不支持 video 标签，建议升级浏览器。
       <source src="@/assets/movie/Feeling-the-Air.mp4" type="video/webm"/>
@@ -294,7 +294,7 @@ export default {
     position: absolute; 
     left: 0;
     margin-left: 0;
-    z-index: 0;
+    z-index: -1;
   }
   .loginForm{
     position: relative;
@@ -310,5 +310,10 @@ label.el-form-item__label{
 }
 .el-radio__label{
  color: #fff;
+}
+@media screen and (max-width:760px){
+  .Nphone{
+    display: none;
+  }
 }
 </style>
